@@ -9,7 +9,7 @@
 import UIKit
 import DisplayIOFramework
 
-class AbstractViewController: UIViewController {
+class AbstractViewController: UIViewController, DioEventDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +21,6 @@ class AbstractViewController: UIViewController {
     func showAd(placemetnId: String) {
         DioController.sharedInstance.showAd(presentingViewController: self, placementId: "3353")
     }
-}
-
-extension AbstractViewController: DioEventDelegate {
     
     func onInit(placementIds: [String]) {
         
@@ -57,3 +54,4 @@ extension AbstractViewController: DioEventDelegate {
         
     }
 }
+

@@ -89,6 +89,13 @@ class AddPlacementViewController: UIViewController {
 extension AddPlacementViewController: DioEventDelegate {
     
     func onInit(placementIds: [String]) {
+        if placementIds.isEmpty {
+            loadingIndicator.stopAnimating()
+            loadingIndicator.isHidden = true
+            AlertUtil.showAlert(parent: self, message: StringConstants.errNoFill)
+            return
+        }
+        
         for placementId in placementIds {
             if let placement = DioController.sharedInstance.placements[placementId], let name = placement.name, let type = StringConstants.adTypes[(placement.data?[StringConstants.adsKey].array?.first?[StringConstants.adKey][StringConstants.typeKey].string) ?? StringConstants.noFillKey], let appId = self.appId {
                 loadingIndicator.stopAnimating()
@@ -107,9 +114,7 @@ extension AddPlacementViewController: DioEventDelegate {
     }
     
     func onNoAds(placementId: String) {
-        loadingIndicator.stopAnimating()
-        loadingIndicator.isHidden = true
-        AlertUtil.showAlert(parent: self, message: StringConstants.errNoFill)
+        
     }
     
     func onAdReady(placementId: String) {

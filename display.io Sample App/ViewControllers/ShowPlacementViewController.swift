@@ -38,6 +38,8 @@ class ShowPlacementViewController: AbstractViewController {
     }
     
     override func onAdReady(placementId: String) {
+        if placementId != self.placementId { return }
+        
         adIsLoading = false
         adIsLoaded = true
         loadingIndicator.stopAnimating()
@@ -56,6 +58,8 @@ class ShowPlacementViewController: AbstractViewController {
     }
     
     override func onNoAds(placementId: String) {
+        if placementId != self.placementId { return }
+        
         adIsLoading = false
         adIsLoaded = false
         loadingIndicator.stopAnimating()
